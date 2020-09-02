@@ -1,0 +1,37 @@
+
+version: 2
+
+models:
+    - name: pageviews_enhanced
+      description: "A complete incrementally loaded table of all page views, enhanced with postcode information"
+      columns:
+          - name: userid
+            description: "The id of the user viewing a page"
+          - name: url
+            description: "The url viewed by the user"
+          - name: pageview_postcode
+            description: "The postcode of the user at the time of the page view"
+          - name: user_extractdatetime
+            description: "The date of the extract of the user table at the time of the page view"
+          - name: pageview_extractdatetime
+            description: "The hour in which the page was viewed"
+            tests:
+                - not_null
+    - name: pageviews_by_currentpostcode
+      description: "An extended version of the pageviews model"
+      columns:
+          - name: pageviews
+            description: "The id of the user viewing a page"
+          - name: current_postcode
+            description: "The current postcode of the user who viewed a page"
+          - name: pageview_hour
+            description: "The hour in which the page was viewed"
+    - name: pageviews_by_pageviewpostcode
+      description: "An extended version of the pageviews model"
+      columns:
+          - name: pageviews
+            description: "The id of the user viewing a page"
+          - name: pageview_postcode
+            description: "The postcode of the user at the time of the page view"
+          - name: pageview_hour
+            description: "The hour in which the page was viewed"
