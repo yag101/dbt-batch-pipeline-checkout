@@ -1,1 +1,1 @@
-# dbt-batch-pipeline-checkout
+# Batch pipeline for checkout.com 
