@@ -22,4 +22,16 @@ This means that the scheduled task will run on the hour (in the 0th minute) ever
 Once relevant permissions have been granted and the user has access to the project which contains the dbt models, they can simply be invoked with the command 'dbt run'. For an initial clean run, consider instead using the command 'dbt run --full-refresh' for the inital run. As the model generates an incrementally loaded table, doing a 'full-refresh' will treat it instead as a fresh new table, truncating the existing data and doing a fresh load with the raw extract data.
 
 ## Querying the final tables
-The final part of the process will generate two tables 
+After the transform process is complete, two new tables will appear in the defined target area in the data warehouse - 'pageviews_by_currentpostcode' and 'pageviews_by_pageviewpostcode'.
+
+To answer the two key BI questions regarding the number of pageviews, the grouping of the total number of pageviews by each type of postcode has been materialised into each table. It has been materialised at the most granular level by time - in this case, by each hour.
+
+To convert this time into a different format, e.g. Month-Year, a simple SQL conversion can be written - see the example below.
+    SELECT
+      pageview_hour,
+      FORMAT_DATETIME("%b-%y", pageview_hour)
+    FROM
+      `tp-appmaker.dbt_Checkout_target.pageviews_by_currentpostcode`
+This convert the pageview hour (in DATETIME format) to the format of abbreviated month and year - e.g. converting the DATETIME of '2020-09-02T07:00:00' to 'Sep-20'.
+
+Using this date conversion, the team are able to simply and performantly group and compare the total pageviews by postcode to fit the requirements for any given date/time comparison of their choice.
