@@ -27,11 +27,17 @@ After the transform process is complete, two new tables will appear in the defin
 To answer the two key BI questions regarding the number of pageviews, the grouping of the total number of pageviews by each type of postcode has been materialised into each table. It has been materialised at the most granular level by time - in this case, by each hour.
 
 To convert this time into a different format, e.g. Month-Year, a simple SQL conversion can be written - see the example below.
+```
     SELECT
-      pageview_hour,
+    pageview_hour,
       FORMAT_DATETIME("%b-%y", pageview_hour)
     FROM
       `tp-appmaker.dbt_Checkout_target.pageviews_by_currentpostcode`
+```
 This convert the pageview hour (in DATETIME format) to the format of abbreviated month and year - e.g. converting the DATETIME of '2020-09-02T07:00:00' to 'Sep-20'.
+
+The syntax for `FORMAT_DATETIME` works like so:
+`FORMAT_DATETIME(format_string, datetime_expression)`
+Where `format_string` represents the desired format you wish the original datetime to appear in. It is possible to construct this from a set of valid format elements. Please refer to the ![list of supported format elements here](https://cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#supported_format_elements_for_datetime).
 
 Using this date conversion, the team are able to simply and performantly group and compare the total pageviews by postcode to fit the requirements for any given date/time comparison of their choice.
