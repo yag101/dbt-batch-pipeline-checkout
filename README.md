@@ -38,6 +38,6 @@ This convert the pageview hour (in DATETIME format) to the format of abbreviated
 
 The syntax for `FORMAT_DATETIME` works like so:
 `FORMAT_DATETIME(format_string, datetime_expression)`
-Where `format_string` represents the desired format you wish the original datetime to appear in. It is possible to construct this from a set of valid format elements. Please refer to the ![list of supported format elements here](https://cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#supported_format_elements_for_datetime).
+Where `format_string` represents the desired format you wish the original datetime to appear in. It is possible to construct this from a set of valid format elements. Please refer to the [list of supported format elements here](https://cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#supported_format_elements_for_datetime).
 
 Using this date conversion, the team are able to simply and performantly group and compare the total pageviews by postcode to fit the requirements for any given date/time comparison of their choice.
